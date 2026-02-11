@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router'
 import { BrowserRouter } from 'react-router'
 import Home from './pages/Home.jsx'
 import Auth from './pages/Auth'
+
+export const serverUrl="http://localhost:8000"
+
 function App() {
   return (
      <BrowserRouter>
