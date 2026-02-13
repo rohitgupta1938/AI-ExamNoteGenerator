@@ -4,9 +4,9 @@ export const getToken =async (userId) => {
     const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
-    console.log(token);
+    // console.log("token : ",token);
     return token;
   } catch (err) {
-    console.log(err);
+    console.log("token err: " ,err);
   }
 };

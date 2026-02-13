@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './utils/connectDB.js'
-import authRoute from './routes/auth.route.js'
+import authRouter from './routes/auth.route.js'
+import userRouter from './routes/user.router.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 dotenv.config();
@@ -25,7 +26,8 @@ app.get("/",(req,res)=>{
     res.send({ message: `backend is running on port ${port}` });
 
 })
-app.use("/api/auth",authRoute);
+app.use("/api/auth",authRouter);
+app.use("/api/user",userRouter);
 
 app.listen(port,()=>{
     connectDB();

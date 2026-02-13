@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider} from 'firebase/auth'
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
+  apiKey: "AIzaSyByXSwo22Bka9KZLV0n8RLQ_jqlGOF3DlQ",
   authDomain: "authaiexamnote.firebaseapp.com",
   projectId: "authaiexamnote",
   storageBucket: "authaiexamnote.firebasestorage.app",
@@ -17,4 +17,3 @@ const auth=getAuth(app);
 const provider=new GoogleAuthProvider();
 
 export {auth, provider};
-

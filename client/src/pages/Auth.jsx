@@ -6,6 +6,10 @@ import { signInWithPopup } from "firebase/auth";
 import axios from 'axios';
 import {serverUrl} from '../App.jsx'
 function Auth() {
+  // const nameme=async()=>{
+  //     let result =await axios.get(serverUrl+"/api/user/currentuser",{withCredentials:true});
+  //       console.log("SUCCESS:", result.data);
+  // }
     const handleGoogleAuth=async ()=>{
         try{
             const response=await  signInWithPopup(auth,provider);
@@ -14,7 +18,7 @@ function Auth() {
               console.log("SERVER URL:", serverUrl);
 
             const result=await axios.post(serverUrl+'/api/auth/google',{name,email},{withCredentials:true});
-            console.log(result.data);
+            // console.log(result.data);
 
         }
         catch(err){
@@ -56,6 +60,7 @@ function Auth() {
             <FcGoogle size={22} />
             Continue with Google
           </motion.button>
+          {/* <button className="bg-yellow-400" onClick={nameme}>hello</button> */}
           <p className="mt-6 max-w-xl text-lg bg-gradient-to-br from-black/90 via-black/60 to-black/90 bg-clip-text text-transparent">
             No matter your grade or subject, our AI creates clear, structured,
             and easy-to-understand notes in seconds.Just enter the topic, select
@@ -66,7 +71,7 @@ function Auth() {
             Upgrate any time for ctredit, instant access.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Feature
             icon="🎁"
             title="50 Free Credits"
@@ -106,7 +111,7 @@ function Feature({ icon, title, des }) {
       whileHover={{ y:-12,rotateX:8, rotateY:-8,scale:1.05 }}
       whileTap={{ scale: 0.95 }}
        transition={{type:"spring",stiffness:200, damping:18}}
-      className="max-w-7xl rounded-2xl p-6 bg-gradient-to-br from-black/90 via-black/80 to-black/90 backdrop-blur-xl border border-white/10 text-white shadow-[0_30px_80px_rgba(0,0,0,0.7)] cursor-pointer"
+      className="max-w-7xl rounded-2xl px-6 py-2 bg-gradient-to-br from-black/90 via-black/80 to-black/90 backdrop-blur-xl border border-white/10 text-white shadow-[0_30px_80px_rgba(0,0,0,0.7)] cursor-pointer"
      style={{transformStyle:"preserve-3d"}}
     >
       
