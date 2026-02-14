@@ -1,30 +1,31 @@
 import React from "react";
 import { motion, scale } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
-import {auth,provider} from '../utils/firebase.js'
+import { auth, provider } from "../utils/firebase.js";
 import { signInWithPopup } from "firebase/auth";
-import axios from 'axios';
-import {serverUrl} from '../App.jsx'
+import axios from "axios";
+import { serverUrl } from "../App.jsx";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice.js";
 function Auth() {
-  // const nameme=async()=>{
-  //     let result =await axios.get(serverUrl+"/api/user/currentuser",{withCredentials:true});
-  //       console.log("SUCCESS:", result.data);
-  // }
-    const handleGoogleAuth=async ()=>{
-        try{
-            const response=await  signInWithPopup(auth,provider);
-            const name=response.user.displayName;
-            const email=response.user.email;
-              console.log("SERVER URL:", serverUrl);
+  const dispatch = useDispatch();
+  const handleGoogleAuth = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const name = response.user.displayName;
+      const email = response.user.email;
+      console.log("SERVER URL:", serverUrl);
 
-            const result=await axios.post(serverUrl+'/api/auth/google',{name,email},{withCredentials:true});
-            // console.log(result.data);
-
-        }
-        catch(err){
-          console.log(err);
-        }
+      const result = await axios.post(
+        serverUrl + "/api/auth/google",
+        { name, email },
+        { withCredentials: true }
+      );
+      dispatch(setUserData(result.data));
+    } catch (err) {
+      console.log(err);
     }
+  };
   return (
     <div className="max-h-screen bg-white text-black px-8">
       <motion.header
@@ -108,17 +109,16 @@ function Auth() {
 function Feature({ icon, title, des }) {
   return (
     <motion.div
-      whileHover={{ y:-12,rotateX:8, rotateY:-8,scale:1.05 }}
+      whileHover={{ y: -12, rotateX: 8, rotateY: -8, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-       transition={{type:"spring",stiffness:200, damping:18}}
+      transition={{ type: "spring", stiffness: 200, damping: 18 }}
       className="max-w-7xl rounded-2xl px-6 py-2 bg-gradient-to-br from-black/90 via-black/80 to-black/90 backdrop-blur-xl border border-white/10 text-white shadow-[0_30px_80px_rgba(0,0,0,0.7)] cursor-pointer"
-     style={{transformStyle:"preserve-3d"}}
+      style={{ transformStyle: "preserve-3d" }}
     >
-      
-      <div className="relative z-10" style={{transform:"tranlateZ(30px)"}}>
+      <div className="relative z-10" style={{ transform: "tranlateZ(30px)" }}>
         <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-gray-300">{des}</p>
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-sm text-gray-300">{des}</p>
       </div>
     </motion.div>
   );
