@@ -62,13 +62,13 @@ const Footer = () => {
               Get updates & new features.
             </p>
 
-            <form className="flex flex-col sm:flex-row gap-3">
+            <form className="flex flex-wrap  gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="pl-2 pr-5 py-2 rounded-lg border border-white outline-none"
               />
-              <button className="bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+              <button className= " underflow-hidden bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-700 transition">
                 Subscribe
               </button>
             </form>
