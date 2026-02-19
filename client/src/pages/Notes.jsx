@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import TopicName from "../component/topicName";
 function Notes() {
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.user.userData);
+  const credits = userData ? userData.credits : "0";
+  console.log(credits);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
   return (
     <div>
       <motion.div
@@ -52,12 +59,24 @@ function Notes() {
         </div>
       </motion.div>
       <motion.div
-      initial={{opacity:0,y:20}}
-      animate={{opacity:1, y:0}}
-      transition={{duration:1}}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
       >
-        <TopicName />
+        <TopicName
+          loading={loading}
+          setLoading={setLoading}
+          setResult={setResult}
+          setError={setError}
+        />
       </motion.div>
+      {!result && (
+        <motion.div whileHover={{scale:1.02}}
+        className="h-64 rounded-2xl  flex flex-col items-center justify-center bg-white/60 backdrop-blur-lg border border-dashed border-gray-300 text-gray-500 shadow-inner ">
+          <span className=" text-4xl mb-3">📘</span>
+          <p className="text-sm ">Generated Notes will be appear here</p>
+        </motion.div>
+      )}
     </div>
   );
 }

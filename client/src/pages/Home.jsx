@@ -3,7 +3,9 @@ import Navbar from "../component/Navbar.jsx";
 import { motion } from "motion/react";
 import HomeLogo from "../assets/homepage.jpg";
 import Footer from "../component/Footer.jsx";
+import { useNavigate } from "react-router";
 function Home() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white mx-6 text-black">
       <Navbar />
@@ -25,10 +27,11 @@ function Home() {
                 transform: "translateZ(40px)",
                 textShadow: "0 18px 40px rbga(0,0,0,0.25)",
               }}
-              className="mt-6 max-w-xl text-6xl lg:7xl font-extrabold leading-tight bg-gradient-to-br from-black/90 via-black/60 to-black/90 bg-clip-text text-transparent"
+              className="mt-6 max-w-xl text-6xl lg:7xl font-extrabold leading-tight bg-linear-to-br from-black/90 via-black/60 to-black/90 bg-clip-text text-transparent"
             >
               Create Smart <br />
-              Ai notes in <br />Second
+              Ai notes in <br />
+              Second
             </motion.h1>
 
             <motion.p
@@ -37,7 +40,7 @@ function Home() {
                 transform: "translateZ(40px)",
                 textShadow: "0 18px 40px rbga(0,0,0,0.25)",
               }}
-              className="mt-6 max-w-xl text-lg bg-gradient-to-br from-gray-700/90 via-gray-500/60 to-gray-700/90 bg-clip-text text-transparent"
+              className="mt-6 max-w-xl text-lg bg-linear-to-br from-gray-700/90 via-gray-500/60 to-gray-700/90 bg-clip-text text-transparent"
             >
               Welcome to AI Exam Notes Generator, your smart study partner.
               Enter any topic and get clear, exam-ready notes instantly using
@@ -45,14 +48,16 @@ function Home() {
             </motion.p>
           </motion.div>
           <motion.button
+            onClick={() => {
+              navigate("/notes");
+            }}
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             whileHover={{ y: -8, rotateX: 6, rotateY: -6 }}
             style={{ transformStyle: "preserve-3d" }}
             onHoverStart={() => console.log("hover started!")}
-            className="mt-8 px-10 py-3 rounded-xl flex items-center gap-3 bg-gradient-to-br from-black/90 via-black/80 to-black/90 border border-white/10 text-white font-semibold text-lg cursor-pointer shadow-[0_0_40px_rgba(0,0,0,0.6)]
-"
+            className="mt-8 px-10 py-3 rounded-xl flex items-center gap-3 bg-linear-to-br from-black/90 via-black/80 to-black/90 border border-white/10 text-white font-semibold text-lg cursor-pointer shadow-[0_0_40px_rgba(0,0,0,0.6)]"
           >
             Get Started
           </motion.button>
@@ -102,7 +107,7 @@ function Home() {
           des="Download high-quality study PDFs instantly, completely free."
         />
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
@@ -113,7 +118,7 @@ function Feature({ icon, title, des }) {
       whileHover={{ y: -5, rotateX: 10, rotateY: -10, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
-      className="max-w-7xl rounded-2xl px-6 py-2 bg-gradient-to-br from-black/90 via-black/80 to-black/90 backdrop-blur-xl border border-white/10 text-white shadow-[0_30px_80px_rgba(0,0,0,0.7)] cursor-pointer"
+      className="max-w-7xl rounded-2xl px-6 py-2 bg-linear-to-br from-black/90 via-black/80 to-black/90 backdrop-blur-xl border border-white/10 text-white shadow-[0_30px_80px_rgba(0,0,0,0.7)] cursor-pointer"
       style={{ transformStyle: "preserve-3d" }}
     >
       <div className="relative z-10" style={{ transform: "tranlateZ(30px)" }}>
