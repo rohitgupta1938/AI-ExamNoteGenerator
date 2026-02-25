@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, scale } from "motion/react";
+import { generateNotes } from "../services/api";
 function TopicName({ setResult, setLoading, loading, setError }) {
   const [topic, setTopic] = useState("");
   const [classLevel, setClassLevel] = useState("");
@@ -7,6 +8,37 @@ function TopicName({ setResult, setLoading, loading, setError }) {
   const [revisionMode, setRevisionMode] = useState(false);
   const [includeDiagram, setIncludeDiagram] = useState(false);
   const [includeChart, setIncudeChart] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!topic.trim()) {
+      setError("Please Enter the topic");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    setResult(null);
+
+    try {
+      const result = generateNotes(
+        {
+          topic,
+          classLevel,
+          examType,
+          revisionMode,
+          includeDiagram,
+          includeChart,
+        }
+        
+      );
+      setResult(result);
+        // setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to fetch notes from the server");
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -53,7 +85,8 @@ function TopicName({ setResult, setLoading, loading, setError }) {
         />
       </div>
 
-      <motion.div
+      <motion.button
+        onClick={handleSubmit}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.97 }}
         className={`w-full mt-4 py-3 rounded-xl  font-semibold flex items-center justify-center gap-3 transition ${
@@ -63,7 +96,7 @@ function TopicName({ setResult, setLoading, loading, setError }) {
         }`}
       >
         {loading ? "Generating Notes...." : "Generate Notes"}
-      </motion.div>
+      </motion.button>
     </motion.div>
   );
 }

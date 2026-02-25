@@ -5,6 +5,7 @@ import authRouter from './routes/auth.route.js'
 import userRouter from './routes/user.router.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import notesRouter from './routes/generate.route.js';
 dotenv.config();
 
 
@@ -28,7 +29,7 @@ app.get("/",(req,res)=>{
 })
 app.use("/api/auth",authRouter);
 app.use("/api/user",userRouter);
-
+app.use("/api/notes",notesRouter); 
 app.listen(port,()=>{
     connectDB();
     console.log("backend is listening on port : 8000");
