@@ -4,12 +4,12 @@ export const buildPrompt = ({
   examType,
   revisionMode,
   includeDiagram,
-  includeChart,
+  includeChart
 }) => {
   return `
 You are a STRICT JSON generator for an exam preparation system.
 
-⚠ VERY IMPORTANT:
+⚠️ VERY IMPORTANT:
 - Output MUST be valid JSON
 - Your response will be parsed using JSON.parse()
 - INVALID JSON will cause system failure
@@ -19,7 +19,7 @@ You are a STRICT JSON generator for an exam preparation system.
 - Do NOT use emojis inside text values
 
 TASK:
- Convert the given topic into exam-focused notes.
+Convert the given topic into exam-focused notes.
 
 INPUT:
 Topic: ${topic}
@@ -53,7 +53,7 @@ REVISION MODE RULES (CRITICAL):
     - definition
     - short explanation
     - examples (if applicable)
-  - Paragraph length: max 2-4 lines
+  - Paragraph length: max 2–4 lines
   - No storytelling, no extra theory
 
 IMPORTANCE RULES:

@@ -19,19 +19,16 @@ function TopicName({ setResult, setLoading, loading, setError }) {
     setResult(null);
 
     try {
-      const result = generateNotes(
-        {
-          topic,
-          classLevel,
-          examType,
-          revisionMode,
-          includeDiagram,
-          includeChart,
-        }
-        
-      );
+      const result = generateNotes({
+        topic,
+        classLevel,
+        examType,
+        revisionMode,
+        includeDiagram,
+        includeChart,
+      });
       setResult(result);
-        // setLoading(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       setError("Failed to fetch notes from the server");
@@ -95,7 +92,7 @@ function TopicName({ setResult, setLoading, loading, setError }) {
             : "bg-linear-to-br  from-white to-gray-200 text-black shadow(0_15px_35px_rgba(0,0,0,0.4))"
         }`}
       >
-        {loading ? "Generating Notes...." : "Generate Notes"}
+        {loading ? "Generating Notes..." : "Generate Notes"}
       </motion.button>
     </motion.div>
   );
