@@ -1,6 +1,6 @@
 import UserModel from "../models/user.model.js";
-import {buildPrompt} from "../utils/promptBuilder.js";
-import {generateGeminiResponse} from "../services/gemini.services.js";
+import { buildPrompt } from "../utils/promptBuilder.js";
+import { generateGeminiResponse } from "../services/gemini.services.js";
 import Notes from "../models/notes.model.js";
 export const generateNotes = async (req, res) => {
   try {
@@ -28,16 +28,17 @@ export const generateNotes = async (req, res) => {
         .json({ message: "Insufficient Credit!", creditLeft: user.credits });
     }
 
-    const prompt = buildPrompt(
+    const prompt = buildPrompt({
       topic,
       classLevel,
       examType,
       revisionMode,
       includeDiagram,
-      includeChart
-    );
-
+      includeChart,
+    });
+    // console.log("Prompt being sent:\n", prompt);
     const aiResponse = await generateGeminiResponse(prompt);
+    // console.log(aiResponse);
 
     const notes = await Notes.create({
       user: user._id,
@@ -54,18 +55,18 @@ export const generateNotes = async (req, res) => {
       user.isCreditAvailavle = false;
     }
 
-    if(!Array.isArray(user.notes)) {
-      user.notes=[];
+    if (!Array.isArray(user.notes)) {
+      user.notes = [];
     }
     user.notes.push(notes.id);
     await user.save();
 
     return res.status(200).json({
-      data:aiResponse,
-      noteId:notes._id,
-      creditLeft:user.credits
-    })
+      data: aiResponse,
+      noteId: notes._id,
+      creditLeft: user.credits,
+    });
   } catch (err) {
-    console.error
+    console.error;
   }
 };
